@@ -1,13 +1,20 @@
 <% if (!gallery.length) { %>
   <h3>No photos found.</h3>
 <% } else { %>
+  <div class="toggle-buttons">
+    <button id="toggleAnimation">Enable Animation</button>
+    <button id="toggleShuffling">Enable Shuffling</button>
+    <button id="toggleTrafficCop">Enable TrafficCop</button>
+  </div>
   <ul class="thumbnails">
-    <% _.each(gallery, function(thumbnail) { %>
+    <% _.each(gallery, function(thumbnail, count) { %>
+      <% if (count < 12) { %>
     <li>
       <a href="#photos/<%= thumbnail.id %>" class="thumbnail">
         <img src="<%= thumbnail.dataUri %>" alt="">
       </a>
     </li>
+      <% } %>
     <% }); %>
   </ul>
 <% } %>
