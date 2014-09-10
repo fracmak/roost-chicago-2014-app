@@ -125,11 +125,13 @@ define(function(require) {
           a1, a2, combinedPromise,
           thumbnailWidth = $('.thumbnails').width(),
           windowHeight = $(window).height(),
+          timeLeftMs = Math.round(Math.random() * 1000) + 1000,
+          timeTopMs = Math.round(Math.random() * 1000) + 500,
           newLeft = Math.round(Math.random() * thumbnailWidth),
           newTop = Math.round(Math.random() * windowHeight);
 
-      a1 = AnimationLib.animate(el, 'left', newLeft, 2000, 'ease-out');
-      a2 = AnimationLib.animate(el, 'top', newTop, 2000, 'ease-out');
+      a1 = AnimationLib.animate(el, 'left', newLeft, timeLeftMs, 'ease-out');
+      a2 = AnimationLib.animate(el, 'top', newTop, timeTopMs, 'ease-out');
       combinedPromise = $.when(a1, a2);
       TrafficCop.addRead(combinedPromise);
       combinedPromise.done(function(){
