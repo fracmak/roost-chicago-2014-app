@@ -88,14 +88,16 @@ define(function(require) {
       this.trafficCop = !this.trafficCop;
     },
     toggleAnimation: function(e){
-      var self = this;
+      var self = this,
+          items = this.$('li');
       this.fixLabel($(e.currentTarget), this.animating);
       if (this.animating) {
-        this.$('li').each(function(idx, el) {
+        items.each(function(idx, el) {
           self.stopAnimate($(el));
         });
       } else {
-        this.$('li').each(function(idx, el) {
+        items = Array.prototype.reverse.call(items);
+        items.each(function(idx, el) {
           self.animate($(el));
         });
       }
@@ -106,7 +108,6 @@ define(function(require) {
       $el.html((enabled ? 'Enabled ': 'Disabled ') + type);
     },
     stopAnimate: function($el){
-      $el.css('position', 'relative');
       AnimationLib.stop($el, 'left');
       AnimationLib.stop($el, 'top');
     },
@@ -135,9 +136,7 @@ define(function(require) {
       combinedPromise = $.when(a1, a2);
       TrafficCop.addRead(combinedPromise);
       combinedPromise.done(function(){
-        setTimeout(function(){
-          self.randomizePlacement(el);
-        }, 100);
+        self.randomizePlacement(el);
       });
     },
     serializeData: function() {
