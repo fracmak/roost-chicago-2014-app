@@ -117,7 +117,7 @@ define(function(require) {
         position: 'absolute',
         left: position.left,
         top: position.top,
-        width: $el.width()
+        width: $el.outerWidth()
       });
       this.randomizePlacement($el);
     },
